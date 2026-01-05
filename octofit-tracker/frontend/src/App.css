@@ -1,0 +1,91 @@
+
+body {
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  color: #222;
+}
+
+.App {
+  text-align: center;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.navbar-brand img {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.navbar-brand, .nav-link {
+  color: #fff !important;
+  font-weight: 600;
+}
+.nav-link.active, .nav-link:hover {
+  color: #ffd700 !important;
+}
+
+.card-header {
+  background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  color: #fff !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.table {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.table-dark {
+  background: #007bff !important;
+  color: #fff;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background: #e3f2fd;
+}
+
+.btn-info {
+  background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  color: #fff;
+  border: none;
+  font-weight: 500;
+}
+.btn-info:hover {
+  background: #0056b3;
+  color: #ffd700;
+}
+.btn-primary {
+  background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+  color: #fff;
+  border: none;
+  font-weight: 500;
+}
+.btn-primary:hover {
+  background: #0056b3;
+  color: #ffd700;
+}
+
+h2, .card-title {
+  color: #007bff;
+  font-weight: 700;
+}
+
+a, .App-link {
+  color: #00c6ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover, .App-link:hover {
+  color: #ffd700;
+}
+
+/* Favicon and logo styles */
+.app-logo {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}

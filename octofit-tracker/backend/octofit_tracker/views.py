@@ -1,3 +1,4 @@
+import os
 from rest_framework import viewsets, routers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -25,12 +26,22 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
 
+# Custom API root that returns the full API URL using $CODESPACE_NAME
+def custom_api_root(request):
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    if codespace_name:
+        api_url = f"https://{codespace_name}-8000.app.github.dev/api/"
+    else:
+        api_url = request.build_absolute_uri('/api/')
+    return api_url
+
 @api_view(['GET'])
 def api_root(request, format=None):
+    base_url = custom_api_root(request)
     return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'teams': reverse('team-list', request=request, format=format),
-        'activities': reverse('activity-list', request=request, format=format),
-        'leaderboard': reverse('leaderboard-list', request=request, format=format),
-        'workouts': reverse('workout-list', request=request, format=format),
+        'users': f"{base_url}users/",
+        'teams': f"{base_url}teams/",
+        'activities': f"{base_url}activities/",
+        'leaderboard': f"{base_url}leaderboard/",
+        'workouts': f"{base_url}workouts/",
     })
