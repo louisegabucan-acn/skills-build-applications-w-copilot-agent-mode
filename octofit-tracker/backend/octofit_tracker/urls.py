@@ -13,10 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+import os
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import views
+from django.http import JsonResponse
+from django.urls import reverse
+
 
 
 router = DefaultRouter()
@@ -26,9 +30,19 @@ router.register(r'activities', views.ActivityViewSet, basename='activity')
 router.register(r'leaderboard', views.LeaderboardViewSet, basename='leaderboard')
 router.register(r'workouts', views.WorkoutViewSet, basename='workout')
 
+
+# Custom API root that returns the full API URL using $CODESPACE_NAME
+def custom_api_root(request):
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    if codespace_name:
+        api_url = f"https://{codespace_name}-8000.app.github.dev/api/"
+    else:
+        api_url = request.build_absolute_uri('/api/')
+    return JsonResponse({"api_url": api_url})
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.api_root, name='api-root'),
-    path('api/', views.api_root, name='api-root'),
+    path('', custom_api_root, name='api-root'),
+    path('api/', custom_api_root, name='api-root'),
     path('api/', include(router.urls)),
 ]
